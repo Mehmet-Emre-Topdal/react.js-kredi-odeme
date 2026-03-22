@@ -1,7 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useState } from "react";
 import {
   FormControl,
+  FormHelperText,
   Grid,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -69,125 +71,130 @@ const FormInputs = forwardRef(function FormInputs(props, ref) {
 
   const clear = () => {
     setFormValues(initialValues);
-
     setFormErrors({});
   };
 
   useImperativeHandle(
     ref,
-    () => {
-      return {
-        getFormValues: () => {
-          return formValues;
-        },
-        getFormErrors: () => {
-          return formErrors;
-        },
-
-        validateInputs: () => validate(formValues),
-        clearInputs: () => clear(),
-      };
-    },
+    () => ({
+      getFormValues: () => formValues,
+      getFormErrors: () => formErrors,
+      validateInputs: () => validate(formValues),
+      clearInputs: () => clear(),
+    }),
     [formValues, formErrors]
   );
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2.5}>
       <Grid item xs={12}>
-        <Typography variant="h5">Kredi Ödeme Hesaplama</Typography>
-      </Grid>
-
-      <Grid item xs={12}>
+        <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1.5, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5, fontSize: "0.7rem" }}>
+          Kredi Bilgileri
+        </Typography>
         <TextField
           name="loanAmount"
           label="Kredi Tutarı"
           type="number"
           fullWidth
-          variant="standard"
+          variant="outlined"
           onChange={onChangeHandler}
           value={formValues.loanAmount}
+          error={!!formErrors.loanAmount}
+          helperText={formErrors.loanAmount}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">₺</InputAdornment>,
+          }}
         />
-        <Typography color="secondary">{formErrors.loanAmount}</Typography>
       </Grid>
+
       <Grid item xs={12} md={6}>
         <TextField
           name="profitRate"
           label="Kar Oranı"
           type="number"
           fullWidth
-          variant="standard"
+          variant="outlined"
           onChange={onChangeHandler}
           value={formValues.profitRate}
+          error={!!formErrors.profitRate}
+          helperText={formErrors.profitRate}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+          }}
         />
-        <Typography color="secondary">{formErrors.profitRate}</Typography>
       </Grid>
 
       <Grid item xs={12} md={6}>
-        <FormControl sx={{ minWidth: "100%" }}>
-          <InputLabel id="demo-simple-select-helper-label">
-            Taksit Aralığı
-          </InputLabel>
+        <FormControl fullWidth variant="outlined" error={!!formErrors.installmentInterval}>
+          <InputLabel id="installment-interval-label">Taksit Aralığı</InputLabel>
           <Select
-            labelId="installment-interval"
+            labelId="installment-interval-label"
             name="installmentInterval"
-            label="taksit-araligi"
+            label="Taksit Aralığı"
             onChange={onChangeHandler}
             defaultValue=""
             value={formValues.installmentInterval}
           >
-            <MenuItem value={"monthly"} name="installmentInterval">
-              Aylık
-            </MenuItem>
-            <MenuItem value={"anual"} name="installmentInterval">
-              Yıllık
-            </MenuItem>
-            <MenuItem value={"daily"} name="installmentInterval">
-              Günlük
-            </MenuItem>
+            <MenuItem value={"monthly"}>Aylık</MenuItem>
+            <MenuItem value={"annual"}>Yıllık</MenuItem>
+            <MenuItem value={"daily"}>Günlük</MenuItem>
           </Select>
+          <FormHelperText>{formErrors.installmentInterval}</FormHelperText>
         </FormControl>
-        <Typography color="secondary">
-          {formErrors.installmentInterval}
-        </Typography>
       </Grid>
-      <Grid item xs={12} md={6}>
+
+      <Grid item xs={12}>
         <TextField
           name="numOfInstallments"
           label="Taksit Sayısı"
           type="number"
           fullWidth
-          variant="standard"
+          variant="outlined"
           onChange={onChangeHandler}
           value={formValues.numOfInstallments}
+          error={!!formErrors.numOfInstallments}
+          helperText={formErrors.numOfInstallments}
         />
+      </Grid>
 
-        <Typography color="secondary">
-          {formErrors.numOfInstallments}
+      <Grid item xs={12}>
+        <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1.5, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5, fontSize: "0.7rem" }}>
+          Vergi Oranları
         </Typography>
       </Grid>
+
       <Grid item xs={12} md={6}>
         <TextField
           name="bsmvRate"
-          label="BSMV"
+          label="BSMV Oranı"
           type="number"
           fullWidth
-          variant="standard"
+          variant="outlined"
           onChange={onChangeHandler}
           value={formValues.bsmvRate}
+          error={!!formErrors.bsmvRate}
+          helperText={formErrors.bsmvRate}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+          }}
         />
-        <Typography color="secondary">{formErrors.bsmvRate}</Typography>
       </Grid>
+
       <Grid item xs={12} md={6}>
         <TextField
           name="kkdfRate"
-          label="KKDF"
+          label="KKDF Oranı"
           type="number"
           fullWidth
-          variant="standard"
+          variant="outlined"
           onChange={onChangeHandler}
           value={formValues.kkdfRate}
+          error={!!formErrors.kkdfRate}
+          helperText={formErrors.kkdfRate}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+          }}
         />
-        <Typography color="secondary">{formErrors.kkdfRate}</Typography>
       </Grid>
     </Grid>
   );

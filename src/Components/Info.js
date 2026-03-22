@@ -1,48 +1,53 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Divider, Alert } from "@mui/material";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import React from "react";
 
 const Info = () => {
+  return (
+    <Box
+      sx={{
+        borderLeft: { md: "3px solid #e3ecf7", xs: 0 },
+        borderTop: { xs: "3px solid #e3ecf7", md: 0 },
+        pl: { md: 3, xs: 0 },
+        pt: { xs: 3, md: 0 },
+        height: "100%",
+      }}
+    >
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1.5 }}>
+        <InfoOutlinedIcon color="primary" />
+        <Typography variant="h6" fontWeight={700} color="primary">
+          MET BANK'a Hoşgeldiniz
+        </Typography>
+      </Box>
 
+      <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+        Yandaki formu doldurarak aldığınız kredi için geri ödeme planınızı oluşturabilirsiniz.
+      </Typography>
 
-    return (
-        <Box sx={{borderLeft:{
-            md:"1px dashed gray",
-            xs:0
-            }, 
-            borderTop:{
-                xs: "1px dashed gray",
-                md:0
-            }
-            ,p:3}}>
+      <Divider sx={{ my: 2.5 }} />
 
-            <Typography color="primary" variant="h5">
-                MET BANK'a hoşgeldiniz. 
-            </Typography>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
+        <HelpOutlineIcon sx={{ color: "secondary.main", fontSize: 20 }} />
+        <Typography variant="subtitle2" fontWeight={700} sx={{ color: "secondary.main" }}>
+          BSMV ve KKDF Nedir?
+        </Typography>
+      </Box>
 
-            <Typography sx={{mt:3}}>Bu sayfada, yandaki forma bilgilerinizi girerek aldığınız kredi için geri ödeme planı oluşturabilirsiniz. Kar oranı aylık olarak hesaplanmıştır</Typography>
+      <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+        <strong>BSMV</strong> (Banka ve Sigorta Muameleleri Vergisi) ve <strong>KKDF</strong> (Kaynak
+        Kullanımını Destekleme Fonu), kredinin brüt tutarı üzerinden hesaplanan yasal vergilerdir.
+      </Typography>
 
-            <Typography sx={{mt:3}} color="secondary" variant="h6">
-                BSMV ve KKDF nedir?
-            </Typography>
+      <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7, mt: 1.5 }}>
+        Türkiye'de standart KKDF oranı <strong>%15</strong>, BSMV oranı ise <strong>%5</strong>'tir.
+      </Typography>
 
-            <Typography sx={{mt:2}}>
-            Banka ve Sigorta Muameleleri Vergisi (BSMV) ve Kaynak Kullanımını Destekleme Fonu (KKDF) vergileri kredinin brüt tutarı üzerinden kesilen vergilerdir
-            </Typography>
+      <Alert severity="info" sx={{ mt: 2, borderRadius: 2, fontSize: "0.8rem" }}>
+        Konut kredisi kullanıyorsanız BSMV ve KKDF alanlarına <strong>0</strong> giriniz.
+      </Alert>
+    </Box>
+  );
+};
 
-            <Typography sx={{mt:2}}>
-            Türkiyede KKDF ve BSMV vergilerinin oranları sırasıyla 15 ve 5'tir. Konut kredilerinde ise bu vergiler tahsil edilmemektedir
-            </Typography>
-
-            <Typography sx={{mt:2}}>
-            Eğer Konut kredisi alıyorsanız BSMV ve KKDF kutularına 0 yazabilirsiniz. 
-            </Typography>
-
-            <Typography sx={{mt:2}}>
-            Bunların dışında farklı oranlar da girebilirsiniz
-            </Typography>
-
-        </Box>
-    );
-} 
-
-export default Info
+export default Info;
