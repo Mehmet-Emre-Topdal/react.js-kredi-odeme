@@ -2,6 +2,9 @@
 
 Kurum içi kullanım için geliştirilmiş, React tabanlı kredi geri ödeme hesaplama uygulaması.
 
+<img width="1888" height="858" alt="kredi" src="https://github.com/user-attachments/assets/6ce8dea3-226d-4a9b-826e-7ebdd953b8af" />
+<img width="1880" height="841" alt="kredi2" src="https://github.com/user-attachments/assets/e142c701-cc90-4362-a0f7-c55fe60119cf" />
+
 ## Özellikler
 
 - Kredi tutarı, kar oranı ve taksit sayısına göre **geri ödeme planı** oluşturma
